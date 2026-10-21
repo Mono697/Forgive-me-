@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Vui Lên Nha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;800&display=swap">
+<style>
+/* Same love-note look as "Forgive Me?": one card on a blush field, hearts floating behind. */
+:root {
+  --blush: #ffe3ea;
+  --blush-2: #ffc9d6;
+  --paper: #fffafb;
+  --berry: #8a1c3d;
+  --rose: #e6386b;
+  --ink: #4a2230;
+  --muted: #9b6b7a;
+  --gold: #ffb84d;
+  --display: "Dancing Script", "Segoe Print", "Bradley Hand", cursive;
+  --body: "Nunito", "Segoe UI", system-ui, sans-serif;
+  color-scheme: light;
+}
+html, body { min-height: 100%; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  min-height: 100dvh;
+  -webkit-tap-highlight-color: transparent;
+  background: radial-gradient(circle at 30% 20%, var(--blush) 0%, var(--blush-2) 100%);
+  background-color: var(--blush);
+  color: var(--ink);
+  font-family: var(--body);
+  overflow-x: hidden;
+  display: grid;
+  place-items: safe center;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px;
+  box-sizing: border-box;
+}
+#hearts { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+.note {
+  position: relative; z-index: 1;
+  width: min(440px, 100%);
+  box-sizing: border-box;
+  background: var(--paper);
+  border-radius: 22px;
+  padding: 32px 28px 28px;
+  box-shadow: 0 18px 50px rgba(138, 28, 61, .18);
+  text-align: center;
+  display: grid; gap: 14px;
+}
+.step { display: grid; gap: 14px; justify-items: center; animation: rise .5s cubic-bezier(.34,1.56,.64,1); }
+.step[hidden] { display: none; }
+@keyframes rise { from { transform: translateY(16px); opacity: 0; } }
+.bear { font-size: 64px; line-height: 1; animation: bob 2.4s ease-in-out infinite; }
+h1 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(2.4rem, 9vw, 3.2rem); line-height: 1.05;
+  color: var(--berry); margin: 0; text-wrap: balance;
+}
+p { margin: 0; font-size: 1.05rem; line-height: 1.55; color: var(--ink); }
+.sign { font-family: var(--display); font-size: 1.6rem; color: var(--rose); }
+.small { font-size: .95rem; color: var(--muted); font-weight: 600; min-height: 1.4em; }
+
+button { user-select: none; -webkit-user-select: none; }
+button {
+  font-family: var(--body); font-weight: 800; font-size: 1.05rem;
+  border: 0; border-radius: 999px; padding: 14px 30px; cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+button:focus-visible { outline: 3px solid var(--berry); outline-offset: 3px; }
+button:active { transform: scale(.96); }
+.primary { background: var(--rose); color: #fff; box-shadow: 0 6px 18px rgba(230, 56, 107, .4); }
+.primary:hover { box-shadow: 0 8px 24px rgba(230, 56, 107, .55); }
+.ghost { background: #fff; color: var(--muted); border: 2px solid var(--blush-2); }
+
+/* Step 1: gift */
+.gift { font-size: 96px; line-height: 1; background: none; padding: 0; box-shadow: none; animation: wiggle 1.6s ease-in-out infinite; }
+.gift.shake { animation: shake .12s linear infinite; }
+@keyframes wiggle { 0%, 70%, 100% { transform: rotate(0); } 78% { transform: rotate(-10deg); } 86% { transform: rotate(10deg); } 94% { transform: rotate(-6deg); } }
+@keyframes shake { 0% { transform: translate(-3px, 0) rotate(-6deg); } 50% { transform: translate(3px, 0) rotate(6deg); } 100% { transform: translate(-3px, 0) rotate(-6deg); } }
+
+/* Step 2: meter + jar + hug */
+.meter { width: 100%; display: grid; gap: 6px; }
+.meter-label { display: flex; justify-content: space-between; font-weight: 800; font-size: .9rem; color: var(--berry); }
+.bar { height: 16px; border-radius: 999px; background: var(--blush); overflow: hidden; box-shadow: inset 0 1px 3px rgba(138,28,61,.15); }
+.fill {
+  height: 100%; width: var(--pct, 0%);
+  background: linear-gradient(90deg, #ff7aa2, var(--rose), var(--gold));
+  border-radius: inherit; transition: width .3s ease;
+}
+.jar {
+  background: none; padding: 0; box-shadow: none;
+  font-size: 80px; line-height: 1;
+}
+.jar.pop { animation: jarpop .35s cubic-bezier(.34,1.56,.64,1); }
+@keyframes jarpop { 40% { transform: scale(1.18) rotate(-6deg); } }
+.card {
+  width: 100%; box-sizing: border-box;
+  background: #fff; border: 2px dashed var(--blush-2); border-radius: 16px;
+  padding: 16px 14px; min-height: 84px;
+  display: grid; place-items: center;
+  font-weight: 700; font-size: 1.08rem; line-height: 1.5; color: var(--ink);
+}
+.card.coupon { border-style: solid; border-color: var(--gold); background: #fff7ea; }
+.card .tag { display: block; font-size: .75rem; letter-spacing: .08em; text-transform: uppercase; color: #b86b00; margin-bottom: 4px; }
+.card.flip { animation: flip .4s ease; }
+@keyframes flip { from { transform: rotateX(80deg); opacity: 0; } }
+.row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%; }
+#hug { touch-action: none; position: relative; }
+#hug.holding { transform: scale(1.08); box-shadow: 0 10px 28px rgba(230, 56, 107, .6); }
+
+/* Step 3: question with the runaway button */
+.photo {
+  width: 100%; max-width: 100%; max-height: 50dvh; object-fit: cover;
+  border-radius: 16px; border: 6px solid #fff;
+  box-shadow: 0 10px 28px rgba(138, 28, 61, .25);
+  transform: rotate(-2deg); box-sizing: border-box;
+  animation: pop .6s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop { from { transform: scale(.6) rotate(-8deg); opacity: .3; } }
+.choices { display: flex; gap: 14px; justify-content: center; align-items: center; min-height: 64px; flex-wrap: wrap; }
+#yes { transform: scale(var(--grow, 1)); transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+#no {
+  z-index: 5; touch-action: none;
+  transition: left .28s cubic-bezier(.34,1.56,.64,1), top .28s cubic-bezier(.34,1.56,.64,1);
+}
+#no.loose { position: fixed; }
+
+@keyframes bob { 50% { transform: translateY(-8px) rotate(-4deg); } }
+@media (max-width: 420px) {
+  .note { padding: 24px 18px 22px; gap: 12px; }
+  .bear { font-size: 52px; }
+  .gift { font-size: 84px; }
+  .jar { font-size: 68px; }
+  p { font-size: 1rem; }
+  button { padding: 13px 24px; font-size: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bear, .photo, .gift, .step, .jar.pop, .card.flip { animation: none; }
+  #no, #yes { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="hearts"></canvas>
+
+<main class="note" id="note">
+
+  <!-- Step 1: the gift -->
+  <section class="step" id="s1">
+    <div class="bear" aria-hidden="true">🥺</div>
+    <h1>Trâm Anh ơi, hôm nay em mệt hả?</h1>
+    <p>Anh biết dạo này em thấy buồn buồn, người cứ uể oải. Không sao hết nha, anh làm cái này để sạc pin lại cho em nè. Bấm vào hộp quà đi em 👇</p>
+    <button class="gift" id="gift" type="button" aria-label="Mở quà">🎁</button>
+    <div class="small" id="giftHint">Bấm vào đi mà 🙈</div>
+  </section>
+
+  <!-- Step 2: fill the happiness meter -->
+  <section class="step" id="s2" hidden>
+    <div class="meter" aria-label="Thanh vui vẻ">
+      <div class="meter-label"><span>Pin vui vẻ của em</span><span id="pctText">0%</span></div>
+      <div class="bar"><div class="fill" id="fill"></div></div>
+    </div>
+    <p>Bốc một tờ trong hũ yêu thương, hoặc giữ nút để anh ôm em nha.</p>
+    <button class="jar" id="jar" type="button" aria-label="Bốc một tờ">🫙</button>
+    <div class="card" id="card" aria-live="polite">Hũ này toàn điều anh muốn nói với em 💌</div>
+    <div class="row">
+      <button class="primary" id="hug" type="button">Giữ để anh ôm 🤗</button>
+    </div>
+    <div class="small" id="s2hint"></div>
+    <button class="primary" id="toS3" type="button" hidden>Pin đầy rồi! Tiếp nè 💖</button>
+  </section>
+
+  <!-- Step 3: are you happy now? -->
+  <section class="step" id="s3" hidden>
+    <img class="photo" src="photo.jpg" alt="Anh và Trâm Anh">
+    <h1>Em vui hơn chưa?</h1>
+    <div class="choices">
+      <button class="primary" id="yes" type="button">Vui rồi 💖</button>
+      <button class="ghost" id="no" type="button">Chưa vui 😔</button>
+    </div>
+    <div class="small" id="plea" aria-live="polite"></div>
+  </section>
+
+  <!-- Step 4: celebration -->
+  <section class="step" id="s4" hidden>
+    <div class="bear" aria-hidden="true">🥰</div>
+    <h1>Anh biết mà!</h1>
+    <p>Em cười lên là anh vui nhất trên đời luôn. Mấy ngày mệt mỏi rồi sẽ qua, còn anh thì vẫn ở đây với em. Lúc nào buồn thì mở lại trang này, hoặc gọi anh liền nha. 💞</p>
+    <p class="small">Nhớ chụp màn hình mấy phiếu quà để đổi với anh đó 😚</p>
+    <div class="sign">Yêu em nhiều ♥</div>
+    <button class="ghost" id="again" type="button">Bốc thêm điều dễ thương 🫙</button>
+  </section>
+
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const steps = ['s1', 's2', 's3', 's4'].map($);
+  function show(i) { steps.forEach((s, j) => { s.hidden = j !== i; }); }
+  const buzz = ms => { try { navigator.vibrate && navigator.vibrate(ms); } catch (_) {} };
+
+  // ---------- Step 1: gift ----------
+  const gift = $('gift');
+  let opening = false;
+  gift.addEventListener('click', () => {
+    if (opening) return;
+    opening = true;
+    gift.classList.add('shake');
+    $('giftHint').textContent = 'Đang mở nè...';
+    buzz([30, 40, 30]);
+    setTimeout(() => {
+      burst(innerWidth / 2, innerHeight / 2, 90);
+      buzz(60);
+      show(1);
+    }, 900);
+  });
+
+  // ---------- Step 2: meter, jar, hug ----------
+  const notes = [
+    'Em cười lên là cả ngày của anh sáng luôn ☀️',
+    'Em là người dễ thương nhất anh từng gặp 🌸',
+    'Hôm nay em đã cố gắng nhiều rồi, anh tự hào về em lắm 💪',
+    'Anh nhớ em nhiều hơn em nghĩ đó 🥹',
+    'Uống ly nước đi em, rồi để anh ôm 🧸',
+    'Mệt thì nghỉ, có anh ở đây rồi 🫶',
+    'Em xinh lắm, kể cả lúc mới ngủ dậy 😚',
+    'Em không phải cố gắng một mình đâu 💞',
+    'Buồn cũng được, khóc cũng được, anh vẫn thương em y vậy 🤍',
+    'Em là điều may mắn nhất của anh 🍀',
+    'Ra ngoài đứng nắng 5 phút đi em, rồi nhắn anh nha 🌤️',
+    'Anh yêu em, hôm nay và mọi ngày ♥',
+  ];
+  const coupons = [
+    'Đổi được 1 ly trà sữa do anh mua 🧋',
+    'Đổi được 1 lần anh đấm bóp vai cho em 💆‍♀️',
+    'Anh dẫn em đi ăn món em thích nhất 🍜',
+    '1 buổi tối em chọn phim, anh không cãi 🎬',
+    'Ôm không giới hạn trong 1 ngày 🧸',
+  ];
+  let deck = [];
+  function nextPick() {
+    if (!deck.length) {
+      deck = [...notes.map(t => ({ t })), ...coupons.map(t => ({ t, coupon: true }))];
+      for (let i = deck.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [deck[i], deck[j]] = [deck[j], deck[i]]; }
+    }
+    return deck.pop();
+  }
+
+  let pct = 0;
+  const fill = $('fill'), pctText = $('pctText'), toS3 = $('toS3'), s2hint = $('s2hint');
+  function addJoy(n) {
+    if (pct >= 100) return;
+    pct = Math.min(100, pct + n);
+    fill.style.setProperty('--pct', pct + '%');
+    pctText.textContent = Math.round(pct) + '%';
+    if (pct >= 100) {
+      toS3.hidden = false;
+      s2hint.textContent = 'Đầy pin rồi nè! 🔋✨';
+      const r = fill.getBoundingClientRect();
+      burst(r.right, r.top, 60);
+      buzz([40, 60, 40]);
+    }
+  }
+
+  const jar = $('jar'), card = $('card');
+  jar.addEventListener('click', () => {
+    const pick = nextPick();
+    card.className = 'card' + (pick.coupon ? ' coupon' : '');
+    card.innerHTML = pick.coupon ? '<div><span class="tag">Phiếu quà · chụp màn hình lại</span></div>' : '';
+    const text = document.createElement(pick.coupon ? 'div' : 'span');
+    text.textContent = pick.t;
+    (pick.coupon ? card.firstChild : card).appendChild(text);
+    void card.offsetWidth; card.classList.add('flip');
+    jar.classList.remove('pop'); void jar.offsetWidth; jar.classList.add('pop');
+    const r = jar.getBoundingClientRect();
+    burst(r.left + r.width / 2, r.top + r.height / 2, pick.coupon ? 40 : 18);
+    buzz(25);
+    addJoy(pick.coupon ? 14 : 10);
+  });
+
+  const hug = $('hug');
+  const hugLines = ['Ôm chặt nè 🤗', 'Chặt hơn nữa 🫂', 'Không buông đâu 💞', 'Ấm chưa em? 🥰'];
+  let holdTimer = null, held = 0;
+  function startHug(e) {
+    if (e) e.preventDefault();
+    if (holdTimer) return;
+    hug.classList.add('holding');
+    holdTimer = setInterval(() => {
+      held++;
+      addJoy(1.2);
+      if (held % 4 === 0) {
+        const r = hug.getBoundingClientRect();
+        burst(r.left + Math.random() * r.width, r.top, 4);
+        buzz(15);
+      }
+      if (held % 20 === 0) hug.textContent = hugLines[(held / 20 - 1) % hugLines.length];
+    }, 60);
+  }
+  function endHug() {
+    clearInterval(holdTimer); holdTimer = null;
+    hug.classList.remove('holding');
+    hug.textContent = 'Giữ để anh ôm 🤗';
+  }
+  hug.addEventListener('pointerdown', startHug);
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => hug.addEventListener(ev, endHug));
+  hug.addEventListener('contextmenu', e => e.preventDefault());
+  hug.addEventListener('keydown', e => { if ((e.key === ' ' || e.key === 'Enter') && !e.repeat) startHug(e); });
+  hug.addEventListener('keyup', e => { if (e.key === ' ' || e.key === 'Enter') endHug(); });
+
+  toS3.addEventListener('click', () => { show(2); burst(innerWidth / 2, innerHeight / 3, 50); });
+
+  // ---------- Step 3: the "No" button runs away (same trick as Forgive Me?) ----------
+  const no = $('no'), yes = $('yes'), plea = $('plea');
+  const pleas = [
+    'Nút này nhát lắm, không bấm được đâu 🙈',
+    'Thiệt hông đó? 🥹',
+    'Để anh ôm thêm cái nữa nha 🧸',
+    'Anh mua đồ ăn vặt cho em liền 🍫',
+    'Nút Chưa vui đi ngủ rồi 😴',
+    'Bấm nút hồng đi em 💕',
+    'Anh không bỏ cuộc đâu 💪',
+  ];
+  let tries = 0;
+  function runAway(e) {
+    if (e) e.preventDefault();
+    const r = no.getBoundingClientRect();
+    if (!no.classList.contains('loose')) {
+      no.style.left = r.left + 'px';
+      no.style.top = r.top + 'px';
+      no.classList.add('loose');
+      void no.offsetWidth;
+    }
+    const pad = 16;
+    const vw = window.visualViewport ? visualViewport.width : innerWidth;
+    const vh = window.visualViewport ? visualViewport.height : innerHeight;
+    const maxX = vw - r.width - pad, maxY = vh - r.height - pad;
+    const pt = e && e.touches && e.touches[0] ? e.touches[0] : e;
+    const px = pt && pt.clientX != null ? pt.clientX : r.left;
+    const py = pt && pt.clientY != null ? pt.clientY : r.top;
+    let x, y, guard = 0;
+    do {
+      x = pad + Math.random() * Math.max(0, maxX - pad);
+      y = pad + Math.random() * Math.max(0, maxY - pad);
+      guard++;
+    } while (Math.hypot(x - px, y - py) < 180 && guard < 30);
+    no.style.left = x + 'px';
+    no.style.top = y + 'px';
+    tries++;
+    plea.textContent = pleas[(tries - 1) % pleas.length];
+    yes.style.setProperty('--grow', Math.min(1 + tries * 0.08, 1.8));
+  }
+  no.addEventListener('pointerenter', runAway);
+  no.addEventListener('pointerdown', runAway);
+  no.addEventListener('touchstart', runAway, { passive: false });
+  no.addEventListener('click', runAway);
+  no.addEventListener('focus', () => runAway());
+  addEventListener('resize', () => { if (no.classList.contains('loose') && !steps[2].hidden) runAway(); });
+
+  yes.addEventListener('click', () => {
+    no.remove();
+    show(3);
+    burst(innerWidth / 2, innerHeight / 2, 120);
+    setTimeout(() => burst(innerWidth / 4, innerHeight / 3, 60), 350);
+    setTimeout(() => burst(innerWidth * 3 / 4, innerHeight / 3, 60), 700);
+    buzz([50, 50, 50, 50, 120]);
+  });
+  $('again').addEventListener('click', () => { show(1); });
+
+  // ---------- Hearts: floating, plus a little burst wherever she taps ----------
+  const c = $('hearts');
+  const ctx = c.getContext('2d');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let hearts = [];
+  function size() { c.width = innerWidth * devicePixelRatio; c.height = innerHeight * devicePixelRatio; ctx.setTransform(devicePixelRatio, 0, 0, devicePixelRatio, 0, 0); }
+  size(); addEventListener('resize', size);
+  function add(x, y, fast) {
+    hearts.push({ x, y, s: 10 + Math.random() * 18, vy: fast ? -(2 + Math.random() * 4) : -(0.4 + Math.random() * 0.8),
+      vx: fast ? (Math.random() - .5) * 6 : (Math.random() - .5) * .4, a: 1, fade: fast ? .012 : .002,
+      hue: ['#e6386b', '#ff7aa2', '#ffb3c7', '#c2185b', '#ffb84d'][Math.floor(Math.random() * 5)] });
+  }
+  function drawHeart(h) {
+    ctx.save(); ctx.globalAlpha = Math.max(h.a, 0) * .8; ctx.fillStyle = h.hue;
+    ctx.translate(h.x, h.y); ctx.scale(h.s / 20, h.s / 20);
+    ctx.beginPath(); ctx.moveTo(0, 6);
+    ctx.bezierCurveTo(-10, -2, -6, -12, 0, -6);
+    ctx.bezierCurveTo(6, -12, 10, -2, 0, 6);
+    ctx.fill(); ctx.restore();
+  }
+  function burst(x, y, n) { for (let i = 0; i < n; i++) add(x, y, true); }
+  addEventListener('pointerdown', e => { if (e.target === document.body || e.target === c) burst(e.clientX, e.clientY, 10); });
+  function tick() {
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    if (!reduce && Math.random() < .06) add(Math.random() * innerWidth, innerHeight + 20, false);
+    hearts.forEach(h => { h.x += h.vx; h.y += h.vy; h.vy += h.fade > .005 ? .04 : 0; h.a -= h.fade; drawHeart(h); });
+    hearts = hearts.filter(h => h.a > 0 && h.y > -40 && h.y < innerHeight + 60);
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+</body>
+</html>
