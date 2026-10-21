@@ -154,7 +154,7 @@ button:active { transform: scale(.96); }
   <section class="step" id="s1">
     <div class="bear" aria-hidden="true">🥺</div>
     <h1>Trâm Anh ơi, hôm nay em mệt hả?</h1>
-    <p>Anh biết dạo này em thấy buồn buồn, người cứ uể oải. Không sao hết nha, anh làm cái này để sạc pin lại cho em nè. Bấm vào hộp quà đi em 👇</p>
+    <p>Chồng biết dạo này em thấy buồn buồn, người cứ uể oải. Không sao hết nha, chồng làm cái này để sạc pin lại cho em nè. Bấm vào hộp quà đi em 👇</p>
     <button class="gift" id="gift" type="button" aria-label="Mở quà">🎁</button>
     <div class="small" id="giftHint">Bấm vào đi mà 🙈</div>
   </section>
@@ -165,11 +165,11 @@ button:active { transform: scale(.96); }
       <div class="meter-label"><span>Pin vui vẻ của em</span><span id="pctText">0%</span></div>
       <div class="bar"><div class="fill" id="fill"></div></div>
     </div>
-    <p>Bốc một tờ trong hũ yêu thương, hoặc giữ nút để anh ôm em nha.</p>
+    <p>Bốc một tờ trong hũ yêu thương, hoặc giữ nút để chồng ôm em nha.</p>
     <button class="jar" id="jar" type="button" aria-label="Bốc một tờ">🫙</button>
-    <div class="card" id="card" aria-live="polite">Hũ này toàn điều anh muốn nói với em 💌</div>
+    <div class="card" id="card" aria-live="polite">Hũ này toàn điều chồng muốn nói với em 💌</div>
     <div class="row">
-      <button class="primary" id="hug" type="button">Giữ để anh ôm 🤗</button>
+      <button class="primary" id="hug" type="button">Giữ để chồng ôm 🤗</button>
     </div>
     <div class="small" id="s2hint"></div>
     <button class="primary" id="toS3" type="button" hidden>Pin đầy rồi! Tiếp nè 💖</button>
@@ -177,7 +177,7 @@ button:active { transform: scale(.96); }
 
   <!-- Step 3: are you happy now? -->
   <section class="step" id="s3" hidden>
-    <img class="photo" src="photo.jpg" alt="Anh và Trâm Anh">
+    <img class="photo" src="photo.jpg" alt="Chồng và Trâm Anh">
     <h1>Em vui hơn chưa?</h1>
     <div class="choices">
       <button class="primary" id="yes" type="button">Vui rồi 💖</button>
@@ -189,9 +189,9 @@ button:active { transform: scale(.96); }
   <!-- Step 4: celebration -->
   <section class="step" id="s4" hidden>
     <div class="bear" aria-hidden="true">🥰</div>
-    <h1>Anh biết mà!</h1>
-    <p>Em cười lên là anh vui nhất trên đời luôn. Mấy ngày mệt mỏi rồi sẽ qua, còn anh thì vẫn ở đây với em. Lúc nào buồn thì mở lại trang này, hoặc gọi anh liền nha. 💞</p>
-    <p class="small">Nhớ chụp màn hình mấy phiếu quà để đổi với anh đó 😚</p>
+    <h1>Chồng biết mà!</h1>
+    <p>Em cười lên là chồng vui nhất trên đời luôn. Mấy ngày mệt mỏi rồi sẽ qua, còn chồng thì vẫn ở đây với em. Lúc nào buồn thì mở lại trang này, hoặc gọi chồng liền nha. 💞</p>
+    <p class="small">Nhớ chụp màn hình mấy phiếu quà để đổi với chồng đó 😚</p>
     <div class="sign">Yêu em nhiều ♥</div>
     <button class="ghost" id="again" type="button">Bốc thêm điều dễ thương 🫙</button>
   </section>
@@ -223,24 +223,23 @@ button:active { transform: scale(.96); }
 
   // ---------- Step 2: meter, jar, hug ----------
   const notes = [
-    'Em cười lên là cả ngày của anh sáng luôn ☀️',
-    'Em là người dễ thương nhất anh từng gặp 🌸',
-    'Hôm nay em đã cố gắng nhiều rồi, anh tự hào về em lắm 💪',
-    'Anh nhớ em nhiều hơn em nghĩ đó 🥹',
-    'Uống ly nước đi em, rồi để anh ôm 🧸',
-    'Mệt thì nghỉ, có anh ở đây rồi 🫶',
+    'Em cười lên là cả ngày của chồng sáng luôn ☀️',
+    'Em là người dễ thương nhất chồng từng gặp 🌸',
+    'Hôm nay em đã cố gắng nhiều rồi, chồng tự hào về em lắm 💪',
+    'Chồng nhớ em nhiều hơn em nghĩ đó 🥹',
+    'Uống ly nước đi em, rồi để chồng ôm 🧸',
+    'Mệt thì nghỉ, có chồng ở đây rồi 🫶',
     'Em xinh lắm, kể cả lúc mới ngủ dậy 😚',
     'Em không phải cố gắng một mình đâu 💞',
-    'Buồn cũng được, khóc cũng được, anh vẫn thương em y vậy 🤍',
-    'Em là điều may mắn nhất của anh 🍀',
-    'Ra ngoài đứng nắng 5 phút đi em, rồi nhắn anh nha 🌤️',
-    'Anh yêu em, hôm nay và mọi ngày ♥',
+    'Buồn cũng được, khóc cũng được, chồng vẫn thương em y vậy 🤍',
+    'Em là điều may mắn nhất của chồng 🍀',
+    'Ra ngoài đứng nắng 5 phút đi em, rồi nhắn chồng nha 🌤️',
+    'Chồng yêu em, hôm nay và mọi ngày ♥',
   ];
   const coupons = [
-    'Đổi được 1 ly trà sữa do anh mua 🧋',
-    'Đổi được 1 lần anh đấm bóp vai cho em 💆‍♀️',
-    'Anh dẫn em đi ăn món em thích nhất 🍜',
-    '1 buổi tối em chọn phim, anh không cãi 🎬',
+    'Đổi được 1 lần chồng đấm bóp vai cho em 💆‍♀️',
+    'Chồng dẫn em đi ăn món em thích nhất 🍜',
+    '1 buổi tối em chọn phim, chồng không cãi 🎬',
     'Ôm không giới hạn trong 1 ngày 🧸',
   ];
   let deck = [];
@@ -305,7 +304,7 @@ button:active { transform: scale(.96); }
   function endHug() {
     clearInterval(holdTimer); holdTimer = null;
     hug.classList.remove('holding');
-    hug.textContent = 'Giữ để anh ôm 🤗';
+    hug.textContent = 'Giữ để chồng ôm 🤗';
   }
   hug.addEventListener('pointerdown', startHug);
   ['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => hug.addEventListener(ev, endHug));
@@ -320,11 +319,11 @@ button:active { transform: scale(.96); }
   const pleas = [
     'Nút này nhát lắm, không bấm được đâu 🙈',
     'Thiệt hông đó? 🥹',
-    'Để anh ôm thêm cái nữa nha 🧸',
-    'Anh mua đồ ăn vặt cho em liền 🍫',
+    'Để chồng ôm thêm cái nữa nha 🧸',
+    'Chồng mua đồ ăn vặt cho em liền 🍫',
     'Nút Chưa vui đi ngủ rồi 😴',
     'Bấm nút hồng đi em 💕',
-    'Anh không bỏ cuộc đâu 💪',
+    'Chồng không bỏ cuộc đâu 💪',
   ];
   let tries = 0;
   function runAway(e) {
